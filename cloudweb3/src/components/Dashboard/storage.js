@@ -1,12 +1,12 @@
+cat > src/services/storage.js << 'EOF'
 import { NFTStorage } from 'nft.storage';
 
-// 1. استخدم المتغير البيئي إذا كان موجودًا
-// 2. استخدم المفتاح الثابت كنسخة احتياطية
-const NFT_STORAGE_KEY = process.env.NFT_STORAGE_TOKEN || 'e292ad04.d5eda98918194cb5a8448cc4bbf4c4a5';
+// استخدم المفتاح مباشرة للتأكد من العمل
+const NFT_STORAGE_KEY = 'e292ad04.d5eda98918194cb5a8448cc4bbf4c4a5';
 
 export const uploadFile = async (file) => {
   try {
-      // تحقق من وجود الملف
+      // التحقق من وجود الملف
           if (!file || !file.buffer) {
                 throw new Error('الملف غير صالح أو مفقود');
                     }
@@ -38,7 +38,7 @@ export const uploadFile = async (file) => {
                                                                                                                                 }
                                                                                                                                 };
 
-                                                                                                                                // دالة مساعدة للحصول على ملفات المستخدم (ستحتاج لتطويرها لاحقًا)
+                                                                                                                                // دالة مساعدة للحصول على ملفات المستخدم
                                                                                                                                 export const getUserFiles = async (userId) => {
                                                                                                                                   // في الإصدار الحالي، نعيد بيانات وهمية
                                                                                                                                     return [
@@ -51,13 +51,4 @@ export const uploadFile = async (file) => {
                                                                                                                                                                           }
                                                                                                                                                                             ];
                                                                                                                                                                             };
-
-                                                                                                                                                                            // دالة مساعدة لحذف الملفات (ستحتاج لتطويرها لاحقًا)
-                                                                                                                                                                            export const deleteFile = async (cid) => {
-                                                                                                                                                                              try {
-                                                                                                                                                                                  // في الإصدار الحالي، نعيد نجاح وهمي
-                                                                                                                                                                                      return { success: true, message: 'تم حذف الملف بنجاح' };
-                                                                                                                                                                                        } catch (error) {
-                                                                                                                                                                                            return { success: false, error: error.message };
-                                                                                                                                                                                              }
-                                                                                                                                                                                              };
+                                                                                                                                                                            EOF
