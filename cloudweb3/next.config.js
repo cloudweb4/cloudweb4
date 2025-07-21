@@ -22,4 +22,14 @@ const nextConfig = {
                                                                                 },
                                                                                 };
                                                                                 
-                                                                                module.exports = nextConfig; */
+                                                                                module.exports = nextConfig; 
+                                                                                // next.config.js
+                                                                                module.exports = {
+                                                                                  // ... الإعدادات السابقة
+                                                                                    api: {
+                                                                                        bodyParser: {
+                                                                                              sizeLimit: '10mb' // زيادة حد حجم الرفع
+                                                                                                  }
+                                                                                                    }
+                                                                                                    };
+                                                                                                    

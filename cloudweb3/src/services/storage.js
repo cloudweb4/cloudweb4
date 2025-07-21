@@ -1,31 +1,33 @@
-import { Web3Storage } from 'web3.storage';
+// src/services/storage.js
+import { NFTStorage } from 'nft.storage';
 
-// سيتم استبدال هذا بمفتاح API الخاص بك
-const client = new Web3Storage({ token: process.env.WEB3STORAGE_TOKEN });
+const client = new NFTStorage({ 
+  token: 'e292ad04.d5eda98918194cb5a8448cc4bbf4c4a5' 
+  });
 
-export const uploadFile = async (file) => {
-  try {
-      const cid = await client.put([file], { 
-            name: file.name,
-                  wrapWithDirectory: false 
-                      });
-                          
-                              return {
-                                    success: true,
-                                          cid,
-                                                url: `https://${cid}.ipfs.dweb.link/${file.name}`
-                                                    };
-                                                      } catch (error) {
-                                                          console.error('Error uploading file:', error);
-                                                              return { success: false, error: error.message };
-                                                                }
-                                                                };
-
-                                                                export const getUserFiles = async (userId) => {
-                                                                  // في التطبيق الحقيقي، ستجلب هذه المعلومات من قاعدة البيانات
-                                                                    return [
-                                                                        { id: 1, name: 'document.pdf', size: '2.4 MB', uploadedAt: '2023-06-15' },
-                                                                            { id: 2, name: 'image.jpg', size: '5.2 MB', uploadedAt: '2023-06-18' },
-                                                                                { id: 3, name: 'video.mp4', size: '120 MB', uploadedAt: '2023-06-20' }
-                                                                                  ];
+  export const uploadFile = async (file) => {
+    try {
+        // تحويل الملف إلى Blob
+            const blob = new Blob([file.buffer], { type: file.mimetype });
+                
+                    // رفع الملف إلى IPFS وFilecoin
+                        const cid = await client.storeBlob(blob);
+                            
+                                return {
+                                      success: true,
+                                            cid,
+                                                  url: `https://${cid}.ipfs.dweb.link/${encodeURIComponent(file.originalname)}`
+                                                      };
+                                                        } catch (error) {
+                                                            console.error('فشل في رفع الملف:', error);
+                                                                return {
+                                                                      success: false,
+                                                                            error: error.message
+                                                                                };
+                                                                                  }
                                                                                   };
+
+                                                                                  export const getUserFiles = async (userId) => {
+                                                                                    // ستقوم بتنفيذ هذا لاحقًا
+                                                                                      return [];
+                                                                                      };
