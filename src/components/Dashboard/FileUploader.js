@@ -1,6 +1,6 @@
 cat > src/components/Dashboard/FileUploader.js << 'EOF'
 import { useState } from 'react';
-import { uploadFile } from '../../services/storage';
+import { uploadFile } from '../../../services/storage';
 
 export default function FileUploader({ onUploadSuccess, storageLimit, storageUsed }) {
   const [isUploading, setIsUploading] = useState(false);
